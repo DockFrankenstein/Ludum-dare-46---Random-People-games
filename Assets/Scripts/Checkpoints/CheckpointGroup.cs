@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-class CheckpointGroup
+class CheckpointGroup : MonoBehaviour
 {
     public Checkpoint currentCheckpoint;
 }
