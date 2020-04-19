@@ -13,13 +13,23 @@ public class PlayerBoomerang : MonoBehaviour
         {
             if (activated)
             {
-                Vector3 targetDirection = new Vector3(Input.mousePosition.x, Input.mousePosition.x, 0);
-                Instantiate(boomerang, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+                Vector2 positionOnScreen = Camera.main.WorldToViewportPoint(transform.position);
+
+                Vector2 mouseOnScreen = (Vector2)Camera.main.ScreenToViewportPoint(Input.mousePosition);
+
+                float angle = AngleBetweenTwoPoints(positionOnScreen, mouseOnScreen);
+
+                Instantiate(boomerang, new Vector2(transform.position.x, transform.position.y), Quaternion.Euler(new Vector3(0f, 0f, angle)));
                 activated = false;
                 StartCoroutine(cooldown());
             }
         }
         
+    }
+
+    float AngleBetweenTwoPoints(Vector3 a, Vector3 b)
+    {
+        return Mathf.Atan2(a.y - b.y, a.x - b.x) * Mathf.Rad2Deg;
     }
 
     IEnumerator cooldown()

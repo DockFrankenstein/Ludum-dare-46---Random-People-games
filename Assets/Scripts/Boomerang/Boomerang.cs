@@ -13,15 +13,15 @@ public class Boomerang : MonoBehaviour
 
     void Start()
     {
-        Throw(600, new Vector2(0,0));
+        Throw(600);
     }
 
-    void Throw(float force, Vector2 direction)
+    void Throw(float force)
     {
         bc.enabled = false;
-        vforce.x = force;
+        vforce.x = -force;
         vforce.y = 0;
-        brakingforce.x = -force/10;
+        brakingforce.x = +force/10;
         brakingforce.y = 0;
         rb.AddRelativeForce(vforce);
         StartCoroutine(brake());
@@ -30,13 +30,14 @@ public class Boomerang : MonoBehaviour
 
     IEnumerator brake()
     {
-        yield return new WaitForSeconds(0.5f);
-        rb.AddRelativeForce(brakingforce);
         yield return new WaitForSeconds(0.1f);
-        rb.AddRelativeForce(brakingforce);
-        yield return new WaitForSeconds(0.1f);
-        rb.AddRelativeForce(brakingforce);
         bc.enabled = true;
+        yield return new WaitForSeconds(0.4f);
+        rb.AddRelativeForce(brakingforce);
+        yield return new WaitForSeconds(0.1f);
+        rb.AddRelativeForce(brakingforce);
+        yield return new WaitForSeconds(0.1f);
+        rb.AddRelativeForce(brakingforce);
         yield return new WaitForSeconds(0.1f);
         rb.AddRelativeForce(brakingforce);
         yield return new WaitForSeconds(0.1f);
@@ -61,5 +62,13 @@ public class Boomerang : MonoBehaviour
         rb.AddRelativeForce(brakingforce * 2);
         yield return new WaitForSeconds(10f);
         Destroy(br);
+    }
+
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.tag == "Player")
+        {
+            Destroy(br);
+        }
     }
 }
