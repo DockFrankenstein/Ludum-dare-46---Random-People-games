@@ -231,10 +231,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2134594612}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26a58fa848e9aaf449b9b49536742794, type: 3}
+  m_Script: {fileID: 11500000, guid: 244283c915534bb4abccef7cc64c2530, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volume: 55
+  volume: 100
 --- !u!82 &2134594614
 AudioSource:
   m_ObjectHideFlags: 0
