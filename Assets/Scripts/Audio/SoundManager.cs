@@ -38,9 +38,9 @@ public class SoundManager : MonoBehaviour
         audioSource.volume = volume / 100;
     }
 
-    public static void PlaySound(AudioClip audioClip)
+    public static void PlaySound(AudioClip clip)
     {
-        audioSource.PlayOneShot(audioClip);
+        audioSource.PlayOneShot(clip);
     }
 
     public static void Play(Sound sound)

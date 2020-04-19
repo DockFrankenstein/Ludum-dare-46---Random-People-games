@@ -9,8 +9,8 @@ public class BeamTrigger : MonoBehaviour
     LightTower childTower;
 
     [Header("KeyBinds")]
-    public KeyCode rotateClockwiseKeybind;
-    public KeyCode rotateAnticlockwiseKeybind;
+    public KeyCode rotateClockwiseKeybind = KeyCode.E;
+    public KeyCode rotateAnticlockwiseKeybind = KeyCode.Q;
 
 
     private void Start()
@@ -38,11 +38,13 @@ public class BeamTrigger : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collider)
     {
-        captureKeysForRotating = true;
+        if(collider.CompareTag("Player"))
+            captureKeysForRotating = true;
     }
     public void OnTriggerExit2D(Collider2D collider)
     {
-        captureKeysForRotating = false;
+        if(collider.CompareTag("Player"))
+            captureKeysForRotating = false;
     }
 
 }
