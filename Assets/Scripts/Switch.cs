@@ -41,6 +41,16 @@ public class Switch : MonoBehaviour
             Deactivate();
         else
             Activate();
+<<<<<<< HEAD
+=======
+        }
+        else {
+            // If you want something to happen when 
+            //something else collides with the switch
+            //then do it here
+            collidedWithSwitch = false;
+        }
+>>>>>>> 67857d1c5b252985334becb8b155369d570c8ace
     }
 
     void Activate()
@@ -55,5 +65,10 @@ public class Switch : MonoBehaviour
         OnDeactivate.Invoke();
         //TO DO: Change sprite
     }
+<<<<<<< HEAD
+=======
+    //Returns true or false depending on if the player has collided with the script
+    
+>>>>>>> 67857d1c5b252985334becb8b155369d570c8ace
 
 }
