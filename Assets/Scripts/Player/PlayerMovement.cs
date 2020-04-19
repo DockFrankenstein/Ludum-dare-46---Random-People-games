@@ -6,18 +6,48 @@ public class PlayerMovement : MonoBehaviour
 {
     public float speed = 0.1f;
 
-    public Rigidbody2D rb;
+    private Rigidbody2D rb;
+    private Animator anim;
 
-    Vector2 input;
+    private void Assign()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+    }
+
+    private Vector2 input;
+
+    private void Awake()
+    {
+        Assign();
+    }
 
     void Update()
+    {
+        Move();
+    }
+
+    private void Animate()
+    {
+        if (anim != null)
+        {
+            anim.SetFloat("X", input.x);
+            anim.SetFloat("Y", input.y);
+        }
+    }
+
+    private void GetInput()
     {
         input.x = Input.GetAxisRaw("Horizontal");
         input.y = Input.GetAxisRaw("Vertical");
     }
 
-    void FixedUpdate()
+    private void Move()
     {
-        rb.MovePosition(rb.position + input * speed);
+        GetInput();
+        Animate();
+
+        if (rb != null)
+        { rb.velocity = input * speed; }
     }
 }
