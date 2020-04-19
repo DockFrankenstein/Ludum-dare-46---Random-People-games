@@ -6,8 +6,7 @@ using UnityEngine;
 public class LightTower : MonoBehaviour
 {
     protected LineRenderer lineRenderer;
-    public Camera playerCamera;
-
+    
     public Vector2 beamOrigin = new Vector2();
     public Vector2 beamDir = new Vector2(1, 0);
 
@@ -40,7 +39,7 @@ public class LightTower : MonoBehaviour
             {
                 if (!hit.collider.CompareTag("Player"))
                 {
-                    lineRenderer.SetPositions(new Vector3[] { transform.position, transform.position });
+                    lineRenderer.SetPositions(new Vector3[] { transform.position, new Vector3(hit.point.x, hit.point.y, transform.position.z)});
 
                     if (hit.collider.CompareTag("LightTower"))
                         hit.collider.GetComponent<LightTower>().Enlighten();
@@ -55,7 +54,7 @@ public class LightTower : MonoBehaviour
                 }
             }
             else
-                lineRenderer.SetPositions(new Vector3[] { transform.position, GetEdgeOfScreen(transform.position, beamDir) });
+                lineRenderer.SetPositions(new Vector3[] { transform.position, new Vector3(MultiplyVectorInDirection(transform.position, beamDir, 10).x, MultiplyVectorInDirection(transform.position, beamDir, 10).y, transform.position.z)});
         }
         finally
         {
@@ -67,7 +66,7 @@ public class LightTower : MonoBehaviour
     public void RotateBeam90Deg(bool clockwise)
     {
         beamDir = RotateVector(beamDir, clockwise);
-        transform.GetChild(0).Rotate(0, 0, 90 * (clockwise ? 1 : -1));
+        transform.GetChild(0).Rotate(0, 0, 90 * (clockwise ? -1 : 1));
 
         UpdateBeams();
     }
@@ -108,13 +107,11 @@ public class LightTower : MonoBehaviour
                 return new Vector2(0, vector.x);
         }
     }
-    protected Vector2 GetEdgeOfScreen(Vector2 origin, Vector2 dir)
+    protected Vector2 MultiplyVectorInDirection(Vector2 origin, Vector2 dir, float multiply)
     {
         if (dir.x != 0)
-            return playerCamera.ScreenToWorldPoint(
-                new Vector3(Screen.width * Mathf.Sign(dir.x), playerCamera.WorldToScreenPoint(origin).y));
+            return origin + new Vector2(dir.x + multiply * Mathf.Sign(dir.x), 0);
         else
-            return playerCamera.ScreenToWorldPoint(
-                new Vector3(playerCamera.WorldToScreenPoint(origin).x, Screen.height * Mathf.Sign(dir.y)));
+            return origin + new Vector2(0, dir.y + multiply * Mathf.Sign(dir.y));
     }
 }
