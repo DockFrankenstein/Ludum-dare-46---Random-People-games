@@ -2,45 +2,54 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//KubikZ: I've changed a little, way, way too much comment in my opinion
+//well, there's no need to explain everything to that point :)
+//also replaced string with enumerator, so there's no need to remember those names
+//and to handle default case
 [SerializeField]
 public class SoundManager : MonoBehaviour
 {
+
+    public static AudioSource audioSource;
+    public static AudioClip windSound;
     
-    public static AudioSource audioSrc;
-
-    //Adjust the volume from inspector 
-    //if you wish to do so
-
+    
     [Range(0, 100)]
     public int volume = 100;
+    
+    public enum Sound
+    {
+        Wind = 0,
+
+    }
 
 
     private void Start()
     {
-        //Initialize the audioSource
-        audioSrc = GetComponent<AudioSource>();
-        //Set the start volume to the volume assigned in the inspector
-        audioSrc.volume = volume / 100;
+        audioSource = GetComponent<AudioSource>();
+        windSound = Resources.Load<AudioClip>("Wind");
+        audioSource.volume = volume / 100;
     }
 
-    //Set the volume to what the user wishes
-    //This can be used in the volume section
-    //and it takes in a value from 0 to 100
 
-    public static void setVolume(int volume)
+    /// <param name="volume">volume level in range from 0 to 100</param>
+    public static void SetVolume(int volume)
     {
-        //Set the volume
-        audioSrc.volume = volume / 100;
+        audioSource.volume = volume / 100;
     }
-
-    //Enter the sound you wish to play
-    //ex :
-    //deathSound = Resources.load<AudioClip> ("death");
-    //PlaySound(deathSound);
-    //NOTE: The sound must be stored in the Resources folder
 
     public static void PlaySound(AudioClip audioClip)
     {
-        audioSrc.PlayOneShot(audioClip);
+        audioSource.PlayOneShot(audioClip);
+    }
+
+    public static void Play(Sound sound)
+    {
+        switch (sound)
+        {
+            case Sound.Wind:
+                audioSource.PlayOneShot(windSound);
+                break;
+        }
     }
 }

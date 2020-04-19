@@ -22,7 +22,7 @@ public class treeDisplayer : MonoBehaviour
 
     private void Update()
     {
-        print(player.position.y + " " + transform.position.y);
+        //print(player.position.y + " " + transform.position.y);
         if (player.position.y < transform.position.y)
         { sRenderer.sortingOrder = OrderInLayerFront; }
         else

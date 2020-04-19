@@ -1,71 +1,59 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [System.Serializable]
+//KubikZ: Refactorings, key handling, and little repairs
 public class Switch : MonoBehaviour
 {
-    //Obtain the switch gameobject
-    [SerializeField]
-    public static bool collidedWithSwitch = false;
+    bool isOn;
+    bool captureForUserSwitching = false;
 
-    [Header("Required stuff")]
-    [SerializeField]    
-    public GameObject player;
+    public UnityEvent OnActivate;
+    public UnityEvent OnDeactivate;
 
-    //We will use this gameobject to obtain 
-    //the players position,tag and a few
-    //other things if neccesarry
+    [Header("KeyBinds")]
+    public KeyCode switchKeybind = KeyCode.Space;
 
-
-    void Start()
-    {
-        //if you wish the script to automatically find the player
-        //then unhash the line of code below
-        //player = this.gameObject;//
-    }
 
     void Update()
     {
-
+        if (captureForUserSwitching)
+            if (Input.GetKeyDown(switchKeybind))
+                SwitchSwitch();
     }
 
-    //When an object collides with this game object
-    void onTriggerEnter2D(Collider other)
+    void OnTriggerEnter2D(Collider2D collision)
     {
-
-        if (other.gameObject.tag == player.tag)
-        {
-            Activate();
-        }
-        else {
-            // If you want something to happen when 
-            //something else collides with the switch
-            //then do it here
-        }
+        if (collision.CompareTag("Player"))
+            captureForUserSwitching = true;
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+            captureForUserSwitching = false;
     }
 
-    //What we do when the user
-    //collides with the button
+    void SwitchSwitch()
+    {
+        if (isOn)
+            Deactivate();
+        else
+            Activate();
+    }
+
     void Activate()
     {
-        Debug.Log("Player has collided with switch");
-        collidedWithSwitch = true;
+        isOn = true;
+        OnActivate.Invoke();
+        //TO DO: Change sprite
     }
-
-
-    //This function below is a boolean function,
-    //and you can call it in an if statement like so:
-    //if (Switch.CollidedWithSwitch())
-    //{
-    //  Debug.log("You have collided with the switch!")
-    //}
-
-
-    public static bool CollidedWithSwitch() 
-    { 
-        if (collidedWithSwitch == true) return true; else return false; 
+    void Deactivate()
+    {
+        isOn = false;
+        OnDeactivate.Invoke();
+        //TO DO: Change sprite
     }
-    
 
 }

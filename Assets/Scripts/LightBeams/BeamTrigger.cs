@@ -8,6 +8,11 @@ public class BeamTrigger : MonoBehaviour
     bool captureKeysForRotating = false;
     LightTower childTower;
 
+    [Header("KeyBinds")]
+    public KeyCode rotateClockwiseKeybind;
+    public KeyCode rotateAnticlockwiseKeybind;
+
+
     private void Start()
     {
         childTower = transform.GetChild(0).GetComponent<LightTower>();
@@ -23,23 +28,21 @@ public class BeamTrigger : MonoBehaviour
     {
         if (captureKeysForRotating)
         {
-            //maybe some keybinds in settings in the future
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(rotateClockwiseKeybind))
                 childTower.RotateBeam90Deg(true);
-            else if (Input.GetKeyDown(KeyCode.Q))
+            else if (Input.GetKeyDown(rotateAnticlockwiseKeybind))
                 childTower.RotateBeam90Deg(false);
         }
     }
 
 
-    public void OnPlayerEnter()
+    public void OnTriggerEnter2D(Collider2D collider)
     {
         captureKeysForRotating = true;
     }
-    public void OnPlayerExit()
+    public void OnTriggerExit2D(Collider2D collider)
     {
         captureKeysForRotating = false;
-
     }
 
 }
