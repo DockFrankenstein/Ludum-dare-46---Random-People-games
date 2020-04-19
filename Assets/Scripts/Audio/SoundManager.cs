@@ -2,25 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//Note the sound Manager MUST BE IN THE SCENE,
+//for you to be able to call these commands
 [SerializeField]
 public class SoundManager : MonoBehaviour
 {
     
     public static AudioSource audioSrc;
-
-    //Adjust the volume from inspector 
-    //if you wish to do so
-
-    [Range(0, 100)]
-    public int volume = 100;
+    public static AudioClip windSound;
 
 
     private void Start()
     {
         //Initialize the audioSource
         audioSrc = GetComponent<AudioSource>();
-        //Set the start volume to the volume assigned in the inspector
-        audioSrc.volume = volume / 100;
+
+        //Find the sounds and store them in a variable to be used later on
+        windSound = Resources.Load<AudioClip>("Wind");
     }
 
     //Set the volume to what the user wishes
@@ -43,4 +42,19 @@ public class SoundManager : MonoBehaviour
     {
         audioSrc.PlayOneShot(audioClip);
     }
+
+    // if you wish to use a function to play sounds
+    //then define it here by adding a case
+    public static void PlaySound(string clip)
+    {
+        switch (clip)
+        {
+            case "wind":
+                audioSrc.PlayOneShot(windSound);
+                break;
+        }
+    }
+
+    //To use this function just do :
+    //SoundManager.PlaySound("wind or any other case the function supports")
 }

@@ -42,6 +42,7 @@ public class Switch : MonoBehaviour
             // If you want something to happen when 
             //something else collides with the switch
             //then do it here
+            collidedWithSwitch = false;
         }
     }
 
@@ -66,6 +67,7 @@ public class Switch : MonoBehaviour
     { 
         if (collidedWithSwitch == true) return true; else return false; 
     }
+    //Returns true or false depending on if the player has collided with the script
     
 
 }
