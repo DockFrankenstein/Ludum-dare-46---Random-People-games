@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 class LevelManager : MonoBehaviour
 {
-    static int currentScene;
+    static int currentScene = 0;
 
     void Start()
     {
