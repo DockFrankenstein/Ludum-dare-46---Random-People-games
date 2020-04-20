@@ -8,35 +8,27 @@ using UnityEngine.Events;
 public class Switch : MonoBehaviour
 {
     bool isOn;
-    bool captureForUserSwitching = false;
 
     public UnityEvent OnActivate;
     public UnityEvent OnDeactivate;
 
-    [Header("KeyBinds")]
-    public KeyCode switchKeybind = KeyCode.Space;
-
-
-    void Update()
-    {
-        if (captureForUserSwitching)
-            if (Input.GetKeyDown(switchKeybind))
-                SwitchSwitch();
-    }
+    private bool cooldown = false;
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
-            captureForUserSwitching = true;
+        if (collision.CompareTag("Boomerang") && !cooldown)
+        { SwitchSwitch(); }
     }
-    private void OnTriggerExit2D(Collider2D collision)
+
+    private void FixedUpdate()
     {
-        if (collision.CompareTag("Player"))
-            captureForUserSwitching = false;
+        if (!GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().isMoving && cooldown)
+        { cooldown = false; }
     }
 
     void SwitchSwitch()
     {
+        cooldown = true;
         if (isOn)
             Deactivate();
         else
