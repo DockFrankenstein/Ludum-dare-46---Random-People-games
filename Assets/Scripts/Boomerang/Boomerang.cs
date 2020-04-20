@@ -60,13 +60,13 @@ public class Boomerang : MonoBehaviour
         rb.AddRelativeForce(brakingforce * 2);
         yield return new WaitForSeconds(0.1f);
         rb.AddRelativeForce(brakingforce * 2);
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(5f);
         Destroy(br);
     }
 
-    void OnTriggerEnter(Collider col)
+    void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.tag == "Player")
+        if (col.collider.tag == "Player")
         {
             Destroy(br);
         }
