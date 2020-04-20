@@ -8,16 +8,19 @@ class LevelManager : MonoBehaviour
     static int currentScene;
     public static LevelManager current;
     public Image fadePanel;
+    public bool fading = false;
 
     void Start()
     {
         DontDestroyOnLoad(gameObject);
         current = this;
+        
     }
 
     public void LoadNextLevel()
     {
-        StartCoroutine(LoadScene(++currentScene));
+        if(!fading)
+            StartCoroutine(LoadScene(++currentScene));
     }
 
     public void LoadSpecificLevel(int sceneIndex)
@@ -29,6 +32,7 @@ class LevelManager : MonoBehaviour
 
     IEnumerator LoadScene(int sceneIndex)
     {
+        fading = true;
         for(float t = 0; t <= 2; t+=0.1f)
         {
             fadePanel.color = new Color(fadePanel.color.r, fadePanel.color.g, fadePanel.color.b, t / 2);
@@ -36,13 +40,12 @@ class LevelManager : MonoBehaviour
         }
 
         SceneManager.LoadScene(sceneIndex);
-
-
-        for (float t = 2; t <= 0; t -= 0.1f)
+        for (float t = 2; t >= 0; t -= 0.1f)
         {
+            Debug.Log("showing");
             fadePanel.color = new Color(fadePanel.color.r, fadePanel.color.g, fadePanel.color.b, t / 2);
             yield return new WaitForSeconds(0.1f);
         }
-
+        fading = false;
     }
 }
