@@ -6,15 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-<<<<<<< HEAD
-    path: Assets/Scenes/DesignTestScene.unity
-    guid: b2a928da5c94e314abf31dfb4c51cb31
-=======
     path: Assets/Scenes/Logo.unity
     guid: 25d1b958fd7fa80438ccd79366f06ec4
   - enabled: 1
     path: Assets/Scenes/Menu.unity
     guid: 0ef289ddcebc22642bb523ab7aab68f8
+  - enabled: 1
+    path: Assets/Scenes/Credits.unity
+    guid: ee6011f5f29d05e4988e6ca912cceb56
   - enabled: 1
     path: Assets/Scenes/Levels/Level1 - 1d.unity
     guid: ca48a3a3e9ea9f843a4972e44ce8b294
@@ -30,5 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Level5 - electric branches.unity
     guid: 20aad2b4819e84743b2dd68fce2f5cd2
->>>>>>> 8c8d16cd254c0c76dfd0d62f3f1ff55149c0856c
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level6 - double security.unity
+    guid: b8f6f9981fbec204ba9018c4a7b12973
   m_configObjects: {}

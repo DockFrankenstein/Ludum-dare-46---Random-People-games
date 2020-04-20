@@ -12,9 +12,13 @@ class LevelManager : MonoBehaviour
 
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
-        current = this;
-        
+        if (current == null)
+        {
+            DontDestroyOnLoad(gameObject);
+            current = this;
+        }
+        else
+        { Destroy(gameObject); }
     }
 
     public void LoadNextLevel()
