@@ -5,9 +5,13 @@ using UnityEngine.UI;
 
 class LevelManager : MonoBehaviour
 {
+<<<<<<< HEAD
     static int currentScene;
     public static LevelManager current;
     public SpriteRenderer fadePanel;
+=======
+    static int currentScene = 0;
+>>>>>>> 8c8d16cd254c0c76dfd0d62f3f1ff55149c0856c
 
     void Start()
     {

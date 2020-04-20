@@ -93,6 +93,7 @@ public class Boomerang : MonoBehaviour
             if (!isActivated) { player.anim.SetTrigger("Exit"); }
 
             player.pointerAxis.GetComponentInChildren<PlayerBoomerang>().activated = true;
+            player.recieveDamage();
             Destroy(br);
         }
     }

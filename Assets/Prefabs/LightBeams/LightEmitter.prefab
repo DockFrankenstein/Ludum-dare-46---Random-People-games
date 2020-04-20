@@ -224,6 +224,8 @@ MonoBehaviour:
   beamOrigin: {x: 0, y: 0}
   beamDir: {x: 1, y: 0}
   towerPointLight: {fileID: 1392670195860809319}
+  litTexture: {fileID: 0}
+  notLitTexture: {fileID: 0}
   lit: 1
 --- !u!1 &7820046431075476947
 GameObject:
@@ -301,7 +303,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.75, y: 1.5625}
+  m_Size: {x: 1.75, y: 1.125}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

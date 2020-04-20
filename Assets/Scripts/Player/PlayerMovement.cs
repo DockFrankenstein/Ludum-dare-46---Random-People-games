@@ -6,16 +6,25 @@ using UnityEngine;
 //Stellan: Whoever made this, I edited it abit please dont get angry 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Moovement")]
     public float speed = 0.1f;
-
     public Transform pointerAxis;
 
+    [Header("Damage")]
+    public SpriteRenderer healthBar;
+    public SpriteRenderer healthNumber;
+    public GameObject damageIndicator;
+    public int health = 0;
+    public Sprite[] healthBars;
+    public Sprite[] healthNumbers;
+
     private Rigidbody2D rb;
+
     [HideInInspector]
     public Animator anim;
 
-    public bool isMoving = false;
     private Vector2 target;
+    public bool isMoving = false;
 
     private void Assign()
     {
@@ -29,7 +38,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+        ResetHealth();
         Assign();
+    }
+
+    private void ResetHealth()
+    {
+        health = healthBars.Length - 1;
+        healthNumber.sprite = healthNumbers[health];
     }
 
     void Update()
@@ -64,14 +80,9 @@ public class PlayerMovement : MonoBehaviour
         {
             target = mousePos;
             direction = (target - rb.position).normalized;
-            //rb.velocity = new Vector2(direction.x * speed, direction.y * speed);
             isMoving = true;
             anim.SetTrigger("Throw");
         }
-        /*if (Vector2.Distance(target,rb.position) < 0.1f)
-        {
-            isMoving = false;
-        }*/
     }
 
     public void RotatePointer()
@@ -87,6 +98,20 @@ public class PlayerMovement : MonoBehaviour
         anim.SetFloat("Point rotation", z);
 
         pointerAxis.eulerAngles = new Vector3(x, y, z);
+    }
+
+    public void recieveDamage()
+    {
+        health--;
+
+        if (health <= 0)
+        {
+            Debug.Log("Gameover");
+        }
+
+        healthBar.sprite = healthBars[healthBars.Length - health - 1];
+        healthNumber.sprite = healthNumbers[health];
+        damageIndicator.GetComponent<Animator>().SetTrigger("Show damage");
     }
 
     private void Move()
