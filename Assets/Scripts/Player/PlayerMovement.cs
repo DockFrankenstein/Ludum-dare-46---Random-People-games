@@ -8,9 +8,13 @@ public class PlayerMovement : MonoBehaviour
 {
     public float speed = 0.1f;
 
+    public Transform pointerAxis;
+
     private Rigidbody2D rb;
-    private Animator anim;
-    private bool isMoving = false;
+    [HideInInspector]
+    public Animator anim;
+
+    public bool isMoving = false;
     private Vector2 target;
 
     private void Assign()
@@ -31,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         Move();
+        RotatePointer();
     }
 
     private void Animate()
@@ -59,13 +64,29 @@ public class PlayerMovement : MonoBehaviour
         {
             target = mousePos;
             direction = (target - rb.position).normalized;
-            rb.velocity = new Vector2(direction.x * speed, direction.y * speed);
+            //rb.velocity = new Vector2(direction.x * speed, direction.y * speed);
             isMoving = true;
+            anim.SetTrigger("Throw");
         }
-        if (Vector2.Distance(target,rb.position) < 0.1f)
+        /*if (Vector2.Distance(target,rb.position) < 0.1f)
         {
             isMoving = false;
-        }
+        }*/
+    }
+
+    public void RotatePointer()
+    {
+        Camera cam = Camera.main;
+        Vector2 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 finalDirection = mousePos - (Vector2)pointerAxis.position;
+
+        float x = pointerAxis.eulerAngles.x;
+        float y = pointerAxis.eulerAngles.y;
+        float z = -(Mathf.Atan2(finalDirection.x, finalDirection.y) * Mathf.Rad2Deg);
+
+        anim.SetFloat("Point rotation", z);
+
+        pointerAxis.eulerAngles = new Vector3(x, y, z);
     }
 
     private void Move()
@@ -76,5 +97,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (rb != null && isMoving == false)
         { rb.velocity = input * speed; }
+        else 
+        { rb.velocity = new Vector2(0f, 0f); }
     }
 }

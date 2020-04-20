@@ -1,0 +1,9 @@
+Start
+Level select
+Options
+Credits
+Exit
+Language
+English
+Pause
+Level

@@ -11,10 +11,10 @@ public class BreakableBlock : MonoBehaviour
     {
         if (col.collider.tag == "Boomerang")
         {
-            Instantiate(debris, new Vector2(transform.position.x + Random.Range(-0.7f, 0.7f), transform.position.y + Random.Range(-0.7f, 0.7f)), Quaternion.Identity, transform.position));
-            Instantiate(debris, new Vector2(transform.position.x + Random.Range(-0.7f, 0.7f), transform.position.y + Random.Range(-0.7f, 0.7f)), Quaternion.Identity, transform.position));
-            Instantiate(debris, new Vector2(transform.position.x + Random.Range(-0.7f, 0.7f), transform.position.y + Random.Range(-0.7f, 0.7f)), Quaternion.Identity, transform.position));
-            Instantiate(debris, new Vector2(transform.position.x + Random.Range(-0.7f, 0.7f), transform.position.y + Random.Range(-0.7f, 0.7f)), Quaternion.Identity, transform.position));
+            Instantiate(debris, new Vector2(transform.position.x + Random.Range(-0.7f, 0.7f), transform.position.y + Random.Range(-0.7f, 0.7f)), Quaternion.identity, transform);
+            Instantiate(debris, new Vector2(transform.position.x + Random.Range(-0.7f, 0.7f), transform.position.y + Random.Range(-0.7f, 0.7f)), Quaternion.identity, transform);
+            Instantiate(debris, new Vector2(transform.position.x + Random.Range(-0.7f, 0.7f), transform.position.y + Random.Range(-0.7f, 0.7f)), Quaternion.identity, transform);
+            Instantiate(debris, new Vector2(transform.position.x + Random.Range(-0.7f, 0.7f), transform.position.y + Random.Range(-0.7f, 0.7f)), Quaternion.identity, transform);
             Destroy(block);
         }
     }
