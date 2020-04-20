@@ -7,14 +7,15 @@ public class BreakableBlock : MonoBehaviour
     public GameObject debris;
     public GameObject block;
 
-    void OnCollisionEnter2D(Collision2D col)
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.collider.tag == "Boomerang")
+        print("A");
+        if (col.tag == "Boomerang")
         {
-            Instantiate(debris, new Vector2(transform.position.x + Random.Range(-0.7f, 0.7f), transform.position.y + Random.Range(-0.7f, 0.7f)), Quaternion.identity, transform);
-            Instantiate(debris, new Vector2(transform.position.x + Random.Range(-0.7f, 0.7f), transform.position.y + Random.Range(-0.7f, 0.7f)), Quaternion.identity, transform);
-            Instantiate(debris, new Vector2(transform.position.x + Random.Range(-0.7f, 0.7f), transform.position.y + Random.Range(-0.7f, 0.7f)), Quaternion.identity, transform);
-            Instantiate(debris, new Vector2(transform.position.x + Random.Range(-0.7f, 0.7f), transform.position.y + Random.Range(-0.7f, 0.7f)), Quaternion.identity, transform);
+            for (int i = 0; i < 4; i++)
+            {
+                Instantiate(debris, new Vector2(transform.position.x + Random.Range(-0.7f, 0.7f), transform.position.y + Random.Range(-0.7f, 0.7f)), Quaternion.identity);
+            }
             Destroy(block);
         }
     }
