@@ -106,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (health <= 0)
         {
-            Debug.Log("Gameover");
+            LevelManager.current.ReloadScene();
         }
 
         healthBar.sprite = healthBars[healthBars.Length - health - 1];
