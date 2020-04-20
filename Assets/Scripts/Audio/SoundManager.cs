@@ -3,10 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-//KubikZ: I've changed a little, way, way too much comment in my opinion
-//well, there's no need to explain everything to that point :)
-//also replaced string with enumerator, so there's no need to remember those names
-//and to handle default case
 [SerializeField]
 public class SoundManager : MonoBehaviour
 {
@@ -27,6 +23,7 @@ public class SoundManager : MonoBehaviour
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        DontDestroyOnLoad(gameObject);
         windSound = Resources.Load<AudioClip>("Wind");
         audioSource.volume = volume / 100;
     }

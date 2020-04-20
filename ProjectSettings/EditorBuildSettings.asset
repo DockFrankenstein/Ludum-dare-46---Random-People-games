@@ -6,6 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+<<<<<<< HEAD
+    path: Assets/Scenes/DesignTestScene.unity
+    guid: b2a928da5c94e314abf31dfb4c51cb31
+=======
     path: Assets/Scenes/Logo.unity
     guid: 25d1b958fd7fa80438ccd79366f06ec4
   - enabled: 1
@@ -26,4 +30,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Level5 - electric branches.unity
     guid: 20aad2b4819e84743b2dd68fce2f5cd2
+>>>>>>> 8c8d16cd254c0c76dfd0d62f3f1ff55149c0856c
   m_configObjects: {}
