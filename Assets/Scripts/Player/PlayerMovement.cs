@@ -12,9 +12,11 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Damage")]
     public SpriteRenderer healthBar;
+    public SpriteRenderer healthNumber;
     public GameObject damageIndicator;
     public int health = 0;
     public Sprite[] healthBars;
+    public Sprite[] healthNumbers;
 
     private Rigidbody2D rb;
 
@@ -43,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
     private void ResetHealth()
     {
         health = healthBars.Length - 1;
+        healthNumber.sprite = healthNumbers[health];
     }
 
     void Update()
@@ -107,6 +110,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         healthBar.sprite = healthBars[healthBars.Length - health - 1];
+        healthNumber.sprite = healthNumbers[health];
         damageIndicator.GetComponent<Animator>().SetTrigger("Show damage");
     }
 
