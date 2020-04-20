@@ -9,6 +9,10 @@ public class LightTower : MonoBehaviour
     
     public Vector2 beamOrigin = new Vector2();
     public Vector2 beamDir = new Vector2(1, 0);
+    public Light towerPointLight;
+    public Sprite litTexture;
+    public Sprite notLitTexture;
+
 
     public bool lit = false;
 
@@ -22,6 +26,8 @@ public class LightTower : MonoBehaviour
 
     void Update()
     {
+        towerPointLight.enabled = lit;
+        
         if (lit)
             UpdateBeam();
     }
@@ -51,6 +57,8 @@ public class LightTower : MonoBehaviour
                     hit.collider.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
                     UpdateBeam();
                     hit.collider.gameObject.layer = LayerMask.NameToLayer("Default");
+                    lineRenderer.SetPositions(new Vector3[] { transform.position, new Vector3(hit.point.x, hit.point.y, transform.position.z)});
+                    UpdateBeams();
                 }
             }
             else
@@ -83,11 +91,13 @@ public class LightTower : MonoBehaviour
     public void Enlighten()
     {
         lit = true;
+        transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = litTexture;
     }
     public void Delighten()
     {
         lit = false;
         lineRenderer.SetPositions(new Vector3[] { new Vector3(), new Vector3() });
+        transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = notLitTexture;
     }
 
     protected Vector2 RotateVector(Vector2 vector, bool clockwise)

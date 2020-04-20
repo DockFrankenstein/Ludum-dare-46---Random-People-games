@@ -2,25 +2,34 @@
 
 class Checkpoint : MonoBehaviour
 {
-    bool isReached = false;
+    public int id;
+    public bool isReached = false;
 
-    public Transform spawnPoint { get; private set; }
     CheckpointGroup checkpointGroup;
 
     private void Start()
     {
-        spawnPoint = transform.GetChild(0);
-
         checkpointGroup = GetComponentInParent<CheckpointGroup>();
     }
 
 
     public void OverrideCheckpoint()
     {
-        if(!isReached)
+        if (!isReached)
         {
-            checkpointGroup.currentCheckpoint = this;
-            isReached = true;
+            Set();
+            checkpointGroup.SetCurrentCheckpoint(this);
         }
+
+    }
+    public void Set()
+    {
+        isReached = true;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+            OverrideCheckpoint();
     }
 }
