@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Audio;
 
 [SerializeField]
 public class SoundManager : MonoBehaviour
@@ -9,7 +9,7 @@ public class SoundManager : MonoBehaviour
     public static SoundManager current;
     public static AudioSource audioSource;
     public AudioClip windSound;
-
+    public AudioMixer master;
 
     [Range(0, 1)]
     float volume = 1;
@@ -30,15 +30,15 @@ public class SoundManager : MonoBehaviour
 
 
     /// <param name="volume">volume level in range from 0 to 100</param>
-    public static void SetVolume(float volume)
+    public void SetVolume(float volume)
     {
-        audioSource.volume = volume;
+        master.SetFloat("MainVolume", volume * 100 - 100);
     }
 
-    public static void PlaySound(AudioClip clip)
+    public void PlaySound(AudioClip clip)
     {
-        audioSource.clip = clip;
-        audioSource.Play();
+        audioSource.Stop();
+        audioSource.PlayOneShot(clip);
     }
     
     
@@ -58,6 +58,8 @@ public class SoundManager : MonoBehaviour
         for (float t = 0; t <= 2; t += 0.1f)
         {
             SetVolume(curve.Evaluate(t));
+            
+        
             yield return new WaitForSeconds(0.1f);
         }
 
@@ -81,20 +83,22 @@ public class SoundManager : MonoBehaviour
     {
         AnimationCurve curve = AnimationCurve.Linear(0, 1, 2, 0);
 
-        for (float t = 0; t <= 2; t += 0.1f)
+        for (float t = 0; t <= 2; t += 0.05f)
         {
             SetVolume(curve.Evaluate(t));
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.05f);
         }
 
         curve = AnimationCurve.Linear(0, 0, 2, 1);
         audioSource.clip = clip;
+        audioSource.enabled = false;
+        audioSource.enabled = true;
 
 
-        for (float t = 0; t <= 2; t += 0.1f)
+        for (float t = 0; t <= 2; t += 0.05f)
         {
             SetVolume(curve.Evaluate(t));
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.05f);
         }
 
     }

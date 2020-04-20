@@ -12,6 +12,10 @@ public class Switch : MonoBehaviour
     public UnityEvent OnActivate;
     public UnityEvent OnDeactivate;
 
+    public Sprite activated;
+    public Sprite deactivated;
+    public SpriteRenderer targetGraphic;
+
     private bool cooldown = false;
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -39,13 +43,13 @@ public class Switch : MonoBehaviour
     {
         isOn = true;
         OnActivate.Invoke();
-        //TO DO: Change sprite
+        targetGraphic.sprite = activated;
     }
     void Deactivate()
     {
         isOn = false;
         OnDeactivate.Invoke();
-        //TO DO: Change sprite
+        targetGraphic.sprite = deactivated;
     }
 
 }

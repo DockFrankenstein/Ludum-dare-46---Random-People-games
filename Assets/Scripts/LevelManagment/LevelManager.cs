@@ -3,9 +3,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+
 class LevelManager : MonoBehaviour
 {
-    static int currentScene;
+    static int currentScene = 2;
     public static LevelManager current;
     public Image fadePanel;
     public bool fading = false;
@@ -14,13 +15,12 @@ class LevelManager : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
         current = this;       
-        if (current == null)
+        /*if (current == null)
         {
-            DontDestroyOnLoad(gameObject);
             current = this;
         }
         else
-        { Destroy(gameObject); }
+        { Destroy(gameObject); }*/
     }
 
     public void LoadNextLevel()
@@ -34,7 +34,10 @@ class LevelManager : MonoBehaviour
         currentScene = sceneIndex;
         StartCoroutine(LoadScene(sceneIndex));
     }
-
+    public void ReloadScene()
+    {
+        LoadSpecificLevel(currentScene);
+    }
 
     IEnumerator LoadScene(int sceneIndex)
     {
