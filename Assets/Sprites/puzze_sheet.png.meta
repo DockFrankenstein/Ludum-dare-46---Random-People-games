@@ -5,6 +5,9 @@ TextureImporter:
   - first:
       213: 6802607013759661140
     second: puzze_sheet_0
+  - first:
+      213: 6920549051441430391
+    second: puzze_sheet_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -45,7 +48,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 32
@@ -142,6 +145,27 @@ TextureImporter:
       bones: []
       spriteID: 454b9b98907b76e50800000000000000
       internalID: 6802607013759661140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: puzze_sheet_1
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 151
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77f35d512baba0060800000000000000
+      internalID: 6920549051441430391
       vertices: []
       indices: 
       edges: []

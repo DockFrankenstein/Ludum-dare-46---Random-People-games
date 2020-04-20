@@ -9,6 +9,8 @@ public class treeDisplayer : MonoBehaviour
     private SpriteRenderer sRenderer;
     private Transform player;
 
+    public float offset;
+
     private void Assign()
     {
         sRenderer = GetComponent<SpriteRenderer>();
@@ -23,7 +25,7 @@ public class treeDisplayer : MonoBehaviour
     private void Update()
     {
         //print(player.position.y + " " + transform.position.y);
-        if (player.position.y < transform.position.y)
+        if (player.position.y < transform.position.y + offset)
         { sRenderer.sortingOrder = OrderInLayerFront; }
         else
         { sRenderer.sortingOrder = OrderInLayerBack; }

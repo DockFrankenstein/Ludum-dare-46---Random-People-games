@@ -9,7 +9,6 @@ public class BreakableBlock : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        print("A");
         if (col.tag == "Boomerang")
         {
             for (int i = 0; i < 4; i++)
