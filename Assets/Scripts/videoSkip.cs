@@ -11,6 +11,7 @@ public class videoSkip : MonoBehaviour
     private void Awake()
     {
         StartCoroutine(waitForVideo());
+        SoundManager.DisableMusic();
     }
 
     private IEnumerator waitForVideo()

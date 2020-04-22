@@ -8,7 +8,9 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager current;
     public static AudioSource audioSource;
+    public AudioSource windAudioSource;
     public AudioClip windSound;
+    public AudioClip currentAudioClip;
     public AudioMixer master;
 
     [Range(0, 1)]
@@ -21,11 +23,32 @@ public class SoundManager : MonoBehaviour
         Theme
     }
 
-    private void Start()
+    private void Awake()
     {
-        audioSource = GetComponent<AudioSource>();
-        DontDestroyOnLoad(gameObject);
-        current = this;
+        print(current != this);
+        if (current == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+            DontDestroyOnLoad(gameObject);
+            current = this;
+        }
+        else if (current != this)
+        {
+            Debug.Log("passing onto current");
+            current.FadeInAudio();
+            current.PlaySound(this.currentAudioClip);
+            Destroy(gameObject);
+        }
+    }
+
+    public static void DisableMusic()
+    {
+        if (current != null)
+        {
+            current.currentAudioClip = null;
+            current.windAudioSource.Stop();
+            audioSource.Stop();
+        }
     }
 
 
@@ -37,10 +60,12 @@ public class SoundManager : MonoBehaviour
 
     public void PlaySound(AudioClip clip)
     {
+        print(audioSource == current.GetComponent<AudioSource>());
         audioSource.Stop();
         audioSource.PlayOneShot(clip);
-    }
-    
+        audioSource.Play();
+        currentAudioClip = clip;
+    } 
     
     public void FadeOutAudio()
     {
@@ -58,8 +83,7 @@ public class SoundManager : MonoBehaviour
         for (float t = 0; t <= 2; t += 0.1f)
         {
             SetVolume(curve.Evaluate(t));
-            
-        
+                
             yield return new WaitForSeconds(0.1f);
         }
 
@@ -102,5 +126,4 @@ public class SoundManager : MonoBehaviour
         }
 
     }
-
 }

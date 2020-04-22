@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 18031629}
   - component: {fileID: 18031628}
   - component: {fileID: 18031627}
+  - component: {fileID: 18031632}
   - component: {fileID: 18031631}
   m_Layer: 5
   m_Name: Canvas
@@ -234,6 +235,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 074bd7016592f584e9de3742bcbcdc1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &18031632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 18031626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2b313671a28bc943b8f79346307ec45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &25520694
@@ -394,7 +407,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 46.35
+  m_fontSize: 85.6
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -509,7 +522,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1475844239}
+      - m_Target: {fileID: 18031632}
         m_MethodName: LoadSpecificLevel
         m_Mode: 3
         m_Arguments:
@@ -518,6 +531,17 @@ MonoBehaviour:
           m_IntArgument: 8
           m_FloatArgument: 0
           m_StringArgument: Credits
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 18031632}
+        m_MethodName: FadeOutAudio
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &187069165
@@ -911,7 +935,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 46.35
+  m_fontSize: 85.6
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1026,7 +1050,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1475844243}
+      - m_Target: {fileID: 18031632}
         m_MethodName: CrossfadeCurrentClip
         m_Mode: 2
         m_Arguments:
@@ -1038,13 +1062,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1475844239}
-        m_MethodName: LoadNextLevel
-        m_Mode: 1
+      - m_Target: {fileID: 18031632}
+        m_MethodName: LoadSpecificLevel
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1414,7 +1438,7 @@ GameObject:
   - component: {fileID: 1475844244}
   - component: {fileID: 1475844243}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Fade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1509,7 +1533,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 244283c915534bb4abccef7cc64c2530, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  windAudioSource: {fileID: 1475844244}
   windSound: {fileID: 8300000, guid: 9555e2b928104e84bb2973e5e179f7c3, type: 3}
+  currentAudioClip: {fileID: 8300000, guid: 52730fd8b82a9d649951f9c370fc9774, type: 3}
   master: {fileID: 24100000, guid: 437b268a415f5db4f8cbb119328f9079, type: 2}
 --- !u!82 &1475844244
 AudioSource:
@@ -1992,7 +2018,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 46.35
+  m_fontSize: 85.6
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

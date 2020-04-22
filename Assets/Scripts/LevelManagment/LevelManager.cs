@@ -11,16 +11,15 @@ class LevelManager : MonoBehaviour
     public Image fadePanel;
     public bool fading = false;
 
-    void Start()
+    private void Start()
     {
         DontDestroyOnLoad(gameObject);
-        current = this;       
-        /*if (current == null)
+        if (current == null)
         {
             current = this;
         }
-        else
-        { Destroy(gameObject); }*/
+        else if (current != this)
+        { Destroy(gameObject); }
     }
 
     public void LoadNextLevel()
